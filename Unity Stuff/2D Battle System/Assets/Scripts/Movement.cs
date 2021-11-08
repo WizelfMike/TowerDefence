@@ -6,12 +6,13 @@ public class Movement : MonoBehaviour
     public float speed;
     public Animator Attack;
     public bool Stop;
-    public WallHp wallhp;
+    public Hp wallhp;
 
     private void Start()
     {
         GameObject theWall = GameObject.Find("Wall");
-        WallHp wallhp = theWall.GetComponent<WallHp>();     
+        Hp wallhp = theWall.GetComponent<Hp>();     
+        
     }
     void Update()
     {
@@ -24,10 +25,6 @@ public class Movement : MonoBehaviour
         {
             transform.Translate(Vector2.left * speed);
         }
-        else
-        {
-            speed = 0;
-        }
     }
 
     public void Animate()
@@ -35,6 +32,10 @@ public class Movement : MonoBehaviour
         GetComponent<Animator>().SetBool("BoolAttack", true);
     }
 
+    public void Halt()
+    {
+        GetComponent<Animator>().SetBool("BoolAttack", false);
+    }
     public void DealingDamage()
     {
         wallhp.wallHp -= wallhp.Damage;
